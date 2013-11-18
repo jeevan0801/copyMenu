@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution objectClass="org.eclipse.core.resources.IFile" adaptable="true" id="plugIns.contribution1">
+         <menu label="CopyMenu" path="additions" id="plugIns.menu1">
+            <separator name="group1"> </separator>
+         </menu>
+         <action label="CopyFilePaths" class="copymenu.popup.actions.CopyFilePaths" menubarPath="plugIns.menu1/group1" enablesFor="+" id="plugIns.CopyFilePaths">
+         </action>
+         <action label="Copy and create" class="copymenu.popup.actions.CopyAndCreate" menubarPath="plugIns.menu1/group1" enablesFor="+" id="plugIns.CopyAndCreate">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+      <page class="copymenu.preferences.CopyMenuPreferencePage" id="copymenu.preferences.CopyMenuPreferencePage" name="CopyMenu Preferences">
+      </page>
+   </extension>
+   <extension point="org.eclipse.core.runtime.preferences">
+      <initializer class="copymenu.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="plugIns.commands.category"
+            name="CopyMenu Category">
+      </category>
+      <command
+            categoryId="plugIns.commands.category"
+            id="plugIns.commands.sampleCommand"
+            name="Create Hot Fix">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="copymenu.handlers.CreateHotFixHandler"
+            commandId="plugIns.commands.sampleCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="plugIns.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+6">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="plugIns.menus.sampleMenu"
+               label="CopyMenu"
+               mnemonic="M">
+            <command
+                  commandId="plugIns.commands.sampleCommand"
+                  id="plugIns.menus.sampleCommand"
+                  mnemonic="S">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="plugIns.toolbars.sampleToolbar">
+            <command
+                  commandId="plugIns.commands.sampleCommand"
+                  icon="icons/sample.gif"
+                  id="plugIns.toolbars.sampleCommand"
+                  tooltip="Create Hot Fix">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   
+
+</plugin>
