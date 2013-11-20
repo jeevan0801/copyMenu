@@ -1,5 +1,8 @@
 package common;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.eclipse.core.resources.IResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -17,6 +20,7 @@ import copymenu.Activator;
 public class Utils {
 	
 	private static IPreferenceStore store;
+	private static MessageConsole console;
 	
 	public static IPreferenceStore getPreferenceStore() {
 		if(store == null) {
@@ -84,10 +88,17 @@ public class Utils {
 	 * @param message
 	 */
 	public static void printOnConsole(String message) {
-		MessageConsole console = new MessageConsole(KeyValues.viewId, null);
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String nowStr = sdf.format(now);
+		
+		if (console == null) {
+			console = new MessageConsole(KeyValues.viewId, null);
+		}
 		ConsolePlugin.getDefault().getConsoleManager().addConsoles(new IConsole[] { console });
 		MessageConsoleStream consoleStream = console.newMessageStream();
 		ConsolePlugin.getDefault().getConsoleManager().showConsoleView(console);
+		consoleStream.println("=============================================="+nowStr+"==============================================");
 		consoleStream.println(message);
 	}
 
