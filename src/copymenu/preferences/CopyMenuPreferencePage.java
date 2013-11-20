@@ -19,7 +19,6 @@ public class CopyMenuPreferencePage extends FieldEditorPreferencePage implements
 	public CopyMenuPreferencePage() {
 		super(GRID);
 		setPreferenceStore(Activator.getDefault().getPreferenceStore());
-		setDescription("A demonstration of a preference page implementation");
 	}
 	public void createFieldEditors() {
 		addField(new BooleanFieldEditor(KeyValues.popupFlag,
